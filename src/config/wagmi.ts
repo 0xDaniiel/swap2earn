@@ -1,21 +1,12 @@
-import { http, createConfig } from 'wagmi';
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { mainnet, polygon, arbitrum, optimism } from 'wagmi/chains';
-import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors';
 
-// WalletConnect Project ID - In production, get this from cloud.walletconnect.com
+// WalletConnect Project ID - Get this from cloud.walletconnect.com
 const projectId = 'YOUR_PROJECT_ID';
 
-export const config = createConfig({
+export const config = getDefaultConfig({
+  appName: 'Swap2Earn',
+  projectId,
   chains: [mainnet, polygon, arbitrum, optimism],
-  connectors: [
-    injected(),
-    walletConnect({ projectId }),
-    coinbaseWallet({ appName: 'Swap2Earn' }),
-  ],
-  transports: {
-    [mainnet.id]: http(),
-    [polygon.id]: http(),
-    [arbitrum.id]: http(),
-    [optimism.id]: http(),
-  },
+  ssr: false,
 });
