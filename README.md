@@ -1,73 +1,36 @@
-# Welcome to your Lovable project
+# Swap2Earn
 
-## Project info
+A **Web3 platform** that lets users **swap tokens and earn rewards** with every transaction.  
+Seamlessly integrated with **RainbowKit**, **Wagmi**, and **Ethers.js** — all powered by **React + Vite** for a smooth, modern dApp experience.
 
-**URL**: https://lovable.dev/projects/4a64c28e-2102-4523-93f7-ac5cf830117a
+---
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+- 🔄 **Swap to Earn** — Every token swap earns you reward points or tokens.  
+- 💰 **Wallet Connection** — Secure wallet connection with [RainbowKit](https://www.rainbowkit.com/) and [Wagmi](https://wagmi.sh/).  
+- ⚡ **Fast Frontend** — Built with [Vite](https://vitejs.dev/) + [React](https://react.dev/) for instant reloads.  
+- 🌐 **On-Chain Interactions** — Easily integrate with Uniswap or custom smart contracts via [Ethers.js](https://docs.ethers.io/).  
+- 🎨 **Responsive UI** — Styled with [Tailwind CSS](https://tailwindcss.com/) for a sleek and adaptive design.  
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4a64c28e-2102-4523-93f7-ac5cf830117a) and start prompting.
+## 🧠 Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+| Layer | Technologies |
+|--------|---------------|
+| **Frontend** | React + Vite + TypeScript |
+| **Wallet Integration** | RainbowKit + Wagmi |
+| **Blockchain** | Ethers.js / Viem |
+| **Styling** | Tailwind CSS + shadcn/ui |
+| **Deployment** | Cloudflare Pages / Vercel |
+| **State Management** | Zustand / React Query |
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/4a64c28e-2102-4523-93f7-ac5cf830117a) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### 1. Clone the repository
+```bash
+git clone https://github.com/0xDaniiel/swaptoearn.git
+cd swaptoearn
