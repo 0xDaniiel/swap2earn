@@ -1,7 +1,8 @@
 import { Card } from './ui/card';
 import { Trophy } from 'lucide-react';
+import { useMemo } from 'react';
 
-interface LeaderboardEntry {
+export interface LeaderboardEntry {
   address: string;
   points: number;
   swaps: number;
@@ -15,13 +16,33 @@ const mockLeaderboard: LeaderboardEntry[] = [
   { address: '0xB5D9...6F0C', points: 6950, swaps: 41 },
 ];
 
-export const Leaderboard = () => {
+interface LeaderboardProps {
+  userAddress?: string;
+  userPoints: number;
+  userSwaps: number;
+}
+
+export const Leaderboard = ({ userAddress, userPoints, userSwaps }: LeaderboardProps) => {
   const getRankColor = (index: number) => {
     if (index === 0) return 'text-yellow-400';
     if (index === 1) return 'text-gray-300';
     if (index === 2) return 'text-orange-400';
     return 'text-muted-foreground';
   };
+
+  const leaderboard = useMemo(() => {
+    const entries = [...mockLeaderboard];
+    
+    if (userAddress && userPoints > 0) {
+      const truncatedAddress = `${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`;
+      const userEntry = { address: truncatedAddress, points: userPoints, swaps: userSwaps };
+      
+      entries.push(userEntry);
+      entries.sort((a, b) => b.points - a.points);
+    }
+    
+    return entries.slice(0, 5);
+  }, [userAddress, userPoints, userSwaps]);
 
   return (
     <Card className="glass-card p-6">
@@ -31,7 +52,7 @@ export const Leaderboard = () => {
       </h2>
       
       <div className="space-y-3">
-        {mockLeaderboard.map((entry, index) => (
+        {leaderboard.map((entry, index) => (
           <div
             key={entry.address}
             className="flex items-center justify-between p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"

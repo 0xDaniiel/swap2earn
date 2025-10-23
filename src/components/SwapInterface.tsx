@@ -5,6 +5,13 @@ import { Button } from './ui/button';
 import { ArrowDownUp, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAccount } from 'wagmi';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 
 interface Token {
   symbol: string;
@@ -91,10 +98,31 @@ export const SwapInterface = ({ onSwap }: SwapInterfaceProps) => {
             onChange={(e) => handleFromAmountChange(e.target.value)}
             className="text-2xl font-mono h-14 bg-secondary/50"
           />
-          <Button variant="secondary" className="gap-2 min-w-[140px]">
-            <span className="font-bold">{fromToken.symbol}</span>
-            <ChevronDown className="h-4 w-4" />
-          </Button>
+          <Select
+            value={fromToken.symbol}
+            onValueChange={(value) => {
+              const token = tokens.find(t => t.symbol === value);
+              if (token && token.symbol !== toToken.symbol) {
+                setFromToken(token);
+              }
+            }}
+          >
+            <SelectTrigger className="gap-2 min-w-[140px] h-14 bg-secondary/50">
+              <SelectValue>
+                <span className="font-bold">{fromToken.symbol}</span>
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {tokens.filter(t => t.symbol !== toToken.symbol).map((token) => (
+                <SelectItem key={token.symbol} value={token.symbol}>
+                  <div className="flex flex-col">
+                    <span className="font-bold">{token.symbol}</span>
+                    <span className="text-xs text-muted-foreground">{token.name}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -124,10 +152,31 @@ export const SwapInterface = ({ onSwap }: SwapInterfaceProps) => {
             readOnly
             className="text-2xl font-mono h-14 bg-secondary/50"
           />
-          <Button variant="secondary" className="gap-2 min-w-[140px]">
-            <span className="font-bold">{toToken.symbol}</span>
-            <ChevronDown className="h-4 w-4" />
-          </Button>
+          <Select
+            value={toToken.symbol}
+            onValueChange={(value) => {
+              const token = tokens.find(t => t.symbol === value);
+              if (token && token.symbol !== fromToken.symbol) {
+                setToToken(token);
+              }
+            }}
+          >
+            <SelectTrigger className="gap-2 min-w-[140px] h-14 bg-secondary/50">
+              <SelectValue>
+                <span className="font-bold">{toToken.symbol}</span>
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {tokens.filter(t => t.symbol !== fromToken.symbol).map((token) => (
+                <SelectItem key={token.symbol} value={token.symbol}>
+                  <div className="flex flex-col">
+                    <span className="font-bold">{token.symbol}</span>
+                    <span className="text-xs text-muted-foreground">{token.name}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

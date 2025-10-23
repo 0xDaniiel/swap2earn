@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { WalletConnect } from '@/components/WalletConnect';
 import { SwapInterface } from '@/components/SwapInterface';
 import { PointsDisplay } from '@/components/PointsDisplay';
 import { RecentSwaps } from '@/components/RecentSwaps';
-import { Leaderboard } from '@/components/Leaderboard';
+import { Leaderboard, LeaderboardEntry } from '@/components/Leaderboard';
 import { Zap } from 'lucide-react';
+import { useAccount } from 'wagmi';
 
 interface Swap {
   id: string;
@@ -16,6 +17,7 @@ interface Swap {
 }
 
 const Index = () => {
+  const { address } = useAccount();
   const [points, setPoints] = useState(0);
   const [totalSwaps, setTotalSwaps] = useState(0);
   const [swaps, setSwaps] = useState<Swap[]>([]);
@@ -36,6 +38,20 @@ const Index = () => {
     setTotalSwaps(prev => prev + 1);
     setSwaps(prev => [newSwap, ...prev].slice(0, 10));
   };
+
+  // Calculate rank based on current points
+  const rank = useMemo(() => {
+    const mockLeaderboard: LeaderboardEntry[] = [
+      { address: '0x742d...C2F8', points: 15420, swaps: 89 },
+      { address: '0x1A3b...9D4E', points: 12350, swaps: 76 },
+      { address: '0x9C7F...3B21', points: 9870, swaps: 54 },
+      { address: '0x4E82...7A19', points: 8230, swaps: 48 },
+      { address: '0xB5D9...6F0C', points: 6950, swaps: 41 },
+    ];
+    
+    const usersAbove = mockLeaderboard.filter(entry => entry.points > points).length;
+    return usersAbove + 1;
+  }, [points]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,7 +76,7 @@ const Index = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 space-y-8">
         {/* Points Display */}
-        <PointsDisplay points={points} rank={142} totalSwaps={totalSwaps} />
+        <PointsDisplay points={points} rank={rank} totalSwaps={totalSwaps} />
 
         {/* Main Grid */}
         <div className="grid lg:grid-cols-2 gap-8">
@@ -69,7 +85,7 @@ const Index = () => {
             <RecentSwaps swaps={swaps} />
           </div>
           <div>
-            <Leaderboard />
+            <Leaderboard userAddress={address} userPoints={points} userSwaps={totalSwaps} />
           </div>
         </div>
 
