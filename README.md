@@ -27,10 +27,4 @@ Seamlessly integrated with **RainbowKit**, **Wagmi**, and **Ethers.js** — all 
 | **State Management** | Zustand / React Query |
 
 ---
-
-## 🛠️ Getting Started
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/0xDaniiel/swaptoearn.git
-cd swaptoearn
+ 
